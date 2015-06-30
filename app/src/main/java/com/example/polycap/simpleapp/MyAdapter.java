@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 /**
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<MyProjects> projects;
-
+    private String imgUrl= "http://2.bp.blogspot.com/-Z6YZ4W0VIs4/UVnzzHZtnWI/AAAAAAAAAC0/ZUrXI2QoFnM/s640/3D-android-with-backpack.jpg.1024x768_q85_crop-smart_upscale-True.jpg";
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -42,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 .inflate(R.layout.row , parent, false);
         // set the view's size, margins, paddings and layout parameters
 
-        ViewHolder vh = new ViewHolder((TextView) v);
+        ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
@@ -53,12 +56,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         TextView title = (TextView)holder.view.findViewById(R.id.title);
         TextView desc = (TextView)holder.view.findViewById(R.id.desc);
-        final ImageView imageView = (ImageView)holder.view.findViewById(R.id.image);
+        final ImageView imageView = (ImageView)holder.view.findViewById(R.id.imageView);
 
         title.setText(projects.get(position).getTitle());
         desc.setText(projects.get(position).getDesc());
-        imageView.setImageResource(projects.get(position).getImage());
+//        imageView.setImageResource(projects.get(position).getImage());
 
+        Picasso.with(holder.view.getContext()).load(imgUrl).into(imageView);
 
         imageView.setOnClickListener(new View.OnClickListener(){
             @Override
