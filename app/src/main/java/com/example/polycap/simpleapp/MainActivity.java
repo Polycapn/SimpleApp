@@ -1,7 +1,12 @@
 package com.example.polycap.simpleapp;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -10,11 +15,11 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -29,27 +34,94 @@ public class MainActivity extends Activity {
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        materialDesign();
 
         // specify an adapter (see also next example)
 
-        ArrayList<MyProjects> projects = new ArrayList<MyProjects>();
+        ArrayList<project> projects = new ArrayList<project>();
 
-        for(int i = 0; i< 20; i++){
-            projects.add(new MyProjects(
-                    "Title" + i,
-                    "This is a description",
-                    R.drawable.fes
+
+            projects.add(new project(
+                    "Monday" ,
+                    "Agenda For Today"
 
             ));
-        }
+            projects.add(new project(
+                    "Tuesday" ,
+                    "Agenda For Today"
+
+            ));
+            projects.add(new project(
+                    "Wednesday" ,
+                    "Agenda For Today"
+
+            ));
+            projects.add(new project(
+                    "Thursday" ,
+                    "Agenda For Today"
+
+            ));
+            projects.add(new project(
+                    "Friday" ,
+                    "Agenda For Today"
+
+            ));
+            projects.add(new project(
+                    "Saturday" ,
+                    "Agenda For Today"
+
+            ));
+            projects.add(new project(
+                    "Sunday" ,
+                    "Agenda For Today"
+
+            ));
 
         mAdapter = new MyAdapter(projects);
+
         mRecyclerView.setAdapter(mAdapter);
+
+    }
+
+    public void materialDesign() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
+        }
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "Here's a Snqqackbar", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
 
     }
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,7 +141,7 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }
