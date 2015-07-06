@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<project> projects;
-    private String imgUrl = "http://2.bp.blogspot.com/-Z6YZ4W0VIs4/UVnzzHZtnWI/AAAAAAAAAC0/ZUrXI2QoFnM/s640/3D-android-with-backpack.jpg.1024x768_q85_crop-smart_upscale-True.jpg";
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(ArrayList<project> projects) {
@@ -40,8 +39,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-       holder.title.setText(projects.get(position).getTitle());
-       holder.desc.setText(projects.get(position).getDesc());
+        holder.title.setText(projects.get(position).getTitle());
+        holder.desc.setText(projects.get(position).getDesc());
 
         holder.row.setOnClickListener(holder);
 
@@ -69,9 +68,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             row = v.findViewById(R.id.row);
         }
 
+
+
         @Override
         public void onClick(View view) {
-           view.getContext().startActivity(new Intent(view.getContext(), DetailsActivity.class));
+            view.getContext().startActivity(new Intent(view.getContext(), DetailsActivity.class));
         }
     }
 }

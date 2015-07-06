@@ -34,7 +34,4 @@ dependencies {
 
     compile 'io.reactivex:rxjava:0.24.0'
     compile 'io.reactivex:rxandroid-framework:0.24.0'
-
-
-
 }
